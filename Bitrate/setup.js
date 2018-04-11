@@ -16,3 +16,6 @@ app.listen(port, ()=>{
 	console.log('listening to port' + port);
 });
 */
+app.get('/',(request,response)=>{
+	response.sendFile(__dirname + '/index.html');
+});
