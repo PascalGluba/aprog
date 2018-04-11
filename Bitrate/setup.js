@@ -19,3 +19,29 @@ app.listen(port, ()=>{
 app.get('/',(request,response)=>{
 	response.sendFile(__dirname + '/index.html');
 });
+
+app.post('/calculate',(request,response)=>{
+	const bitrate = request.body['bitrate'];
+	const duration = request.body['duration'];
+	
+	if(isNaN(bitrate)|| isNaN(duration)||bitrate < 0 || duration < 0){
+		console.log('bitte nur zahlen eingeben');
+		response.render('error',{
+			'bitrate': bitrate,
+			'duration':duration,
+			'message': 'Bitte Eingabe überprüfen.'
+		});
+	}
+	//else if (bitrate < 0 || duration < 0){
+	//	console.log('bitte positive zahlen eingeben);
+	//}
+	else{
+	console.log('bitrate:' + bitrate + 'duration:'+ duration);
+	response.render('result',{
+			'bitrate': bitrate,
+			'duration':duration,
+			'message': bitrate + duration
+	});
+	}
+});
+
